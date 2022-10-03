@@ -1,53 +1,78 @@
 #include "push_swap.h"
 
+static int ft_mediane(t_pile *pile)
+{
+	int *tab = NULL;
+	int a  = tail(pile);
+	int x = 0;
+	int index = 0;
+	tab = create_tab(pile);
+	tab = ft_sort_int_tab(tab,a);
+	if(a % 2)
+		x = a/2 + 1;
+	x = a/2;
+	index = tab[x - 1];
+	return(index);
+}
+
 void ft_trois(t_pile *pile)
 {
-	if(pile->first->nbr > pile->first->next->nbr &&  pile->first->next->nbr < pile->first->next->next->nbr && pile->first->nbr < pile->first->next->next->nbr)
+	int first = pile->first->nbr;
+	int second = pile->first->next->nbr;
+	int last = pile->first->next->next->nbr;
+	if(first > second &&  second < last && first < last)
 		swap(pile,1);
-	if(pile->first->nbr > pile->first->next->nbr &&  pile->first->next->nbr < pile->first->next->next->nbr && pile->first->nbr > pile->first->next->next->nbr)
+	if(first > second &&  second < last && first > last)
 		ra(pile,1);
-	if(pile->first->nbr > pile->first->next->nbr && pile->first->next->nbr > pile->first->next->next->nbr)
+	if(first > second && second > last)
 	{
 		ra(pile,1);
 		swap(pile,1);
 	}
-	if(pile->first->nbr < pile->first->next->nbr && pile->first->nbr > pile->first->next->next->nbr)
+	if(first < second && first > last)
 	{
 		ra(pile,1);
 		ra(pile,1);
 	}
-	if(pile->first->nbr < pile->first->next->nbr && pile->first->next->nbr > pile->first->next->next->nbr && pile->first->nbr < pile->first->next->next->nbr)
+	if(first < second && second > last && first < last)
 	{
 		rra(pile,1);
 		swap(pile,1);
 	}
 }
 
-void traitement(t_pile *pileA,t_pile *pileB)
+static void two_verif(t_pile  *pile)
 {
-	int a = 0;
-	int b = 0;
-	t_push *t;
+	if(pile->first->nbr < pile->first->next->nbr)
+		swap(pile,0);
+}
 
+void static creat_groupA(t_pile *pileA, t_pile *pileB)
+{
+	t_push *t;
+	int a;
+	int b;
+	int x;
+	int index;
+	int *tab_tmp;
+	int tmp;
+	int i;
+
+	i = 0;
+	x = 0;
+	tmp = 1;
+	index = 0;
 	a = tail(pileA);
 	b = tail(pileB);
-	int x = 0;
-	int index = 0;
-	int *tab_tmp =  NULL;
-
-
-	int tmp = 1;
-	int i = 0;
+	tab_tmp =  NULL;
 	if(a < 3)
 		swap(pileA,1);
 	if(a == 3)
 		ft_trois(pileA);
 	while(a > 3)
 	{
-		tab_tmp = create_tab(pileA);
-		tab_tmp = ft_sort_int_tab(tab_tmp,a);
-		x = a/2;
-		index = tab_tmp[x- 1];
+		index = ft_mediane(pileA);
+		//printf("L %d\n",index);
 		while (i < a)
 		{
 			if(index >= pileA->first->nbr)
@@ -64,26 +89,19 @@ void traitement(t_pile *pileA,t_pile *pileB)
 		free(tab_tmp);
 		a = tail(pileA);
 	}
-	if(tail(pileA) == 3)
+	if(tail(pileA) == 2)
+		swap(pileA,1);
+	else
 		ft_trois(pileA);
-	if(tail(pileA)== 2)
-	{
-		if(pileA->first->nbr > pileA->first->next->nbr)
-			swap(pileA,0);
-	}
-	/*i = 0;
-	while (i < tail(pileB))
-	{
-		if (pileB->first->group == tmp - 1)
-			push_a(pileA, pileB);
-		i++;
-	}*/
-	//si le nombre en haut de la pile est le plus grand ou et il y a que un nombre dns la pile push_a 
-	//si il ya 2 chiffre dans un groupe de la pile b on fait une focntion pour vérifier si le plus grand est first sinon swap
-	//remettre les plus grands dans la pileA
+}
+
+void traitement(t_pile *pileA,t_pile *pileB)
+{
+	creat_groupA(pileA,pileB);
+	
 	printf("\n");
 	afficherListe(pileA);
-	printf("%dpileA\n",tmp);
+	printf("\n");
 	afficherListe(pileB);
 	printf("pileB\n");
-} 
+}
