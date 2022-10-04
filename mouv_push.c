@@ -120,7 +120,7 @@ void push_b(t_pile *pileA,t_pile *pileB)
 	pileA->first = pileA->first->next;
 	tmp->next = pileB->first;
 	pileB->first = tmp;
-	printf("\npb\n");
+	printf("pb\n");
 
 }
 void push_a(t_pile *pileA,t_pile *pileB)
@@ -131,7 +131,7 @@ void push_a(t_pile *pileA,t_pile *pileB)
 	pileB->first = pileB->first->next;
 	tmp->next = pileA->first;
 	pileA->first = tmp;
-	printf("\npa\n");
+	printf("pa\n");
 
 }
 /*t_push *t = NULL;

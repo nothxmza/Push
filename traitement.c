@@ -97,9 +97,66 @@ void static creat_groupA(t_pile *pileA, t_pile *pileB)
 
 void traitement(t_pile *pileA,t_pile *pileB)
 {
-	creat_groupA(pileA,pileB);
-	
-	printf("\n");
+	int a;
+	int b;
+
+	a = tail(pileA);
+	b = tail(pileB);
+	int i = 0;
+	if(a < 3)
+		swap(pileA,1);
+	if(a == 3)
+		ft_trois(pileA);
+	/*if(a == 5)
+	{
+		creat_groupA(pileA,pileB);
+		if(pileB->first->nbr < pileB->first->next->nbr)
+			swap(pileB,0);
+		while(i < tail(pileB))
+			push_a(pileA,pileB);
+	}*/
+	else
+	{
+		creat_groupA(pileA,pileB);
+		rra(pileB,0);
+		rra(pileB,0);
+		rra(pileB,0);
+		rra(pileB,0);
+		rra(pileB,0);
+		ra(pileB,0);
+
+		/*b = tail(pileB);
+		int *tab;
+		int index;
+		tab = create_tab(pileB);
+		tab = ft_sort_int_tab(tab,b);
+		index = tab[b - 1];
+		int x = 0;
+		if(a == 2)
+			swap(pileA,1);
+		while(i < 1000)
+		{
+			b = tail(pileB);
+			tab = create_tab(pileB);
+			tab = ft_sort_int_tab(tab,b);
+			index = tab[b - 1];
+			int h = b/2;
+			int z = tab[h - 1];
+			printf("\n%d\n",z);
+			while(x < b)
+			{
+				if (pileB->first->nbr != index && pileB->first->nbr < z)
+					ra(pileB,0);
+				else
+					push_a(pileA,pileB);
+				x++;
+			}
+			x = 0;
+			if(b == 0)
+				break;
+			i++;
+		}*/
+	}
 	afficherListe(pileA);
 	printf("\n");
 	afficherListe(pileB);
