@@ -50,6 +50,7 @@ void swap(t_pile *p,int i);
 void sswap(t_pile *p,t_pile *b);
 void push_b(t_pile *pileA, t_pile *pileB);
 void push_a(t_pile *pileA,t_pile *pileB);
+void	reverse_rotate(t_pile *stack, int i);
 
 //TRAITEMENT
 void traitement(t_pile *pileA,t_pile *pileB);

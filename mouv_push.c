@@ -81,7 +81,7 @@ void rra(t_pile *pile,int h)
 	{
 		tab2[j++] = tab[x++];
 	}
-	pile = insertion_pl2(tab2,pile, j);
+	pile = insertion_pl2(tab2,pile, j - 1);
 	free(tab);
 	free(tab2);
 	//afficherListe(pile);
@@ -134,28 +134,24 @@ void push_a(t_pile *pileA,t_pile *pileB)
 	printf("pa\n");
 
 }
-void	reverse_rotate(t_push **stack, int i)
+void	reverse_rotate(t_pile *stack, int i)
 {
 	t_push	*tmp;
 	t_push	*dsp;
-	int		len;
 
-	len = ft_len_lst(*stack);
-	if (len < 2)
-		return ;
-	dsp = *stack;
+	dsp = stack->first;
 	while (dsp->next)
 	{
 		tmp = dsp;
 		dsp = dsp->next;
 	}
-	dsp->next = (*stack);
-	*stack = dsp;
+	dsp->next = stack->first->next;
+	stack->first->nbr = dsp->nbr;
 	tmp->next = NULL;
 	if (i == 1)
-		ft_putstr("rra\n");
+		printf("rra\n");
 	else if (i == 0)
-		ft_putstr("rrb\n");
+		printf("rrb\n");
 }
 
 /*t_push *t = NULL;

@@ -6,11 +6,14 @@ static int ft_mediane(t_pile *pile)
 	int a  = tail(pile);
 	int x = 0;
 	int index = 0;
+	if(pile == NULL)
+		return(0);
 	tab = create_tab(pile);
 	tab = ft_sort_int_tab(tab,a);
 	if(a % 2)
 		x = a/2 + 1;
-	x = a/2;
+	else
+		x = a/2;
 	index = tab[x - 1];
 	return(index);
 }
@@ -117,48 +120,57 @@ void traitement(t_pile *pileA,t_pile *pileB)
 	}*/
 	else
 	{
+		/*creat_groupA(pileA,pileB);
+		reverse_rotate(pileB,0);
+		reverse_rotate(pileB,0);
+		reverse_rotate(pileB,0);*/
 		creat_groupA(pileA,pileB);
-		rra(pileB,0);
-		rra(pileB,0);
-		rra(pileB,0);
-		rra(pileB,0);
-		rra(pileB,0);
-		ra(pileB,0);
-
-		/*b = tail(pileB);
+		b = tail(pileB);
 		int *tab;
 		int index;
 		tab = create_tab(pileB);
 		tab = ft_sort_int_tab(tab,b);
 		index = tab[b - 1];
 		int x = 0;
+		int z = 0;
 		if(a == 2)
 			swap(pileA,1);
+		if(a == 3)
+			ft_trois(pileA);
 		while(i < 1000)
 		{
 			b = tail(pileB);
 			tab = create_tab(pileB);
 			tab = ft_sort_int_tab(tab,b);
 			index = tab[b - 1];
-			int h = b/2;
-			int z = tab[h - 1];
-			printf("\n%d\n",z);
+			z = ft_mediane(pileB);
+			//printf(" M %d\n",z);
 			while(x < b)
 			{
-				if (pileB->first->nbr != index && pileB->first->nbr < z)
+				if(pileB->first->nbr != index)
+				{
+					//printf("%d      %d\n",pileB->first->nbr,z);
 					ra(pileB,0);
+				}
+				/*else if(pileB->first->nbr != index && pileB->first->nbr > z)
+				{
+					rra(pileB,0);
+				}*/
 				else
 					push_a(pileA,pileB);
 				x++;
 			}
 			x = 0;
 			if(b == 0)
+			{
+				//printf("DONWIOFNOIF");
 				break;
+			}
 			i++;
-		}*/
+		}
 	}
-	afficherListe(pileA);
+	/*afficherListe(pileA);
 	printf("\n");
 	afficherListe(pileB);
-	printf("pileB\n");
+	printf("pileB\n");*/
 }
