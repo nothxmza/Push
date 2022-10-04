@@ -134,6 +134,30 @@ void push_a(t_pile *pileA,t_pile *pileB)
 	printf("pa\n");
 
 }
+void	reverse_rotate(t_push **stack, int i)
+{
+	t_push	*tmp;
+	t_push	*dsp;
+	int		len;
+
+	len = ft_len_lst(*stack);
+	if (len < 2)
+		return ;
+	dsp = *stack;
+	while (dsp->next)
+	{
+		tmp = dsp;
+		dsp = dsp->next;
+	}
+	dsp->next = (*stack);
+	*stack = dsp;
+	tmp->next = NULL;
+	if (i == 1)
+		ft_putstr("rra\n");
+	else if (i == 0)
+		ft_putstr("rrb\n");
+}
+
 /*t_push *t = NULL;
 	int i = tail(pileA);
 	int x = 1;
