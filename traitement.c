@@ -68,17 +68,13 @@ void static creat_groupA(t_pile *pileA, t_pile *pileB)
 	a = tail(pileA);
 	b = tail(pileB);
 	tab_tmp =  NULL;
-	if(a < 3)
-		swap(pileA,1);
-	if(a == 3)
-		ft_trois(pileA);
 	while(a > 3)
 	{
 		index = ft_mediane(pileA);
 		//printf("L %d\n",index);
 		while (i < a)
 		{
-			if(index >= pileA->first->nbr)
+			if(index > pileA->first->nbr)
 			{
 				push_b(pileA,pileB);
 				pileB->first->group = tmp;
@@ -92,7 +88,7 @@ void static creat_groupA(t_pile *pileA, t_pile *pileB)
 		free(tab_tmp);
 		a = tail(pileA);
 	}
-	if(tail(pileA) == 2)
+	if(tail(pileA) == 2 && (pileA->first->nbr > pileA->first->next->nbr))
 		swap(pileA,1);
 	else
 		ft_trois(pileA);
@@ -133,11 +129,8 @@ void traitement(t_pile *pileA,t_pile *pileB)
 		index = tab[b - 1];
 		int x = 0;
 		int z = 0;
-		if(a == 2)
-			swap(pileA,1);
-		if(a == 3)
-			ft_trois(pileA);
-		while(i < 1000)
+		int total = 0;
+		while(1)
 		{
 			b = tail(pileB);
 			tab = create_tab(pileB);
@@ -147,19 +140,33 @@ void traitement(t_pile *pileA,t_pile *pileB)
 			//printf(" M %d\n",z);
 			while(x < b)
 			{
-				if(pileB->first->nbr != index)
+				//si le plus grand est dans le groupw lw plus grand ra
+				//faire autant de rra que de ra
+				//si il est pas dedant rra
+				//
+				if(pileB->first->nbr != index && (total == 0) && (pileB->first->nbr < pileB->first->next->nbr))
 				{
 					//printf("%d      %d\n",pileB->first->nbr,z);
 					ra(pileB,0);
+					if(pileB->first->nbr > z)
+						total++;
 				}
-				/*else if(pileB->first->nbr != index && pileB->first->nbr > z)
-				{
-					rra(pileB,0);
-				}*/
+				/*else if(pileB->first->nbr != index && pileB->first->nbr < z)
+					rra(pileB,0);*/
 				else
+				{
 					push_a(pileA,pileB);
+					//printf("\n%d\n",total);
+					while (total > 0)
+					{
+						rra(pileB,0);
+						total--;
+					}
+					
+				}
 				x++;
 			}
+			total = 0;
 			x = 0;
 			if(b == 0)
 			{
@@ -169,8 +176,8 @@ void traitement(t_pile *pileA,t_pile *pileB)
 			i++;
 		}
 	}
-	/*afficherListe(pileA);
-	printf("\n");
+	afficherListe(pileA);
+	printf("pilea\n");
 	afficherListe(pileB);
-	printf("pileB\n");*/
+	printf("\npileB\n");
 }
