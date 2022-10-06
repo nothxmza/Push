@@ -44,15 +44,15 @@ int	*ft_sort_int_tab(int *tab, int size);
 int *create_tab(t_pile *pile);
 
 //MOUV
-void ra(t_pile *pile,int h);
-void rra(t_pile *pile,int h);
+void rotate(t_pile *pile,int h);
+void revers_rotate(t_pile *pile,int h);
 void swap(t_pile *p,int i);
 void sswap(t_pile *p,t_pile *b);
 void push_b(t_pile *pileA, t_pile *pileB);
 void push_a(t_pile *pileA,t_pile *pileB);
 void	reverse_rotate(t_pile *stack, int i);
 
-//TRAITEMENT
+//traitement
 void traitement(t_pile *pileA,t_pile *pileB);
 void ft_trois(t_pile *pile);
 

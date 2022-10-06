@@ -26,20 +26,20 @@ void ft_trois(t_pile *pile)
 	if(first > second &&  second < last && first < last)
 		swap(pile,1);
 	if(first > second &&  second < last && first > last)
-		ra(pile,1);
+		rotate(pile,1);
 	if(first > second && second > last)
 	{
-		ra(pile,1);
+		rotate(pile,1);
 		swap(pile,1);
 	}
 	if(first < second && first > last)
 	{
-		ra(pile,1);
-		ra(pile,1);
+		rotate(pile,1);
+		rotate(pile,1);
 	}
 	if(first < second && second > last && first < last)
 	{
-		rra(pile,1);
+		revers_rotate(pile,1);
 		swap(pile,1);
 	}
 }
@@ -80,7 +80,7 @@ void static creat_groupA(t_pile *pileA, t_pile *pileB)
 				pileB->first->group = tmp;
 			}
 			else
-				ra(pileA,1);
+				rotate(pileA,1);
 			i++;
 		}
 		i = 0;
@@ -122,62 +122,62 @@ void traitement(t_pile *pileA,t_pile *pileB)
 		reverse_rotate(pileB,0);*/
 		creat_groupA(pileA,pileB);
 		b = tail(pileB);
-		int *tab;
+		int *tab = NULL;
 		int index;
-		tab = create_tab(pileB);
+		/*tab = create_tab(pileB);
 		tab = ft_sort_int_tab(tab,b);
-		index = tab[b - 1];
+		index = tab[b - 1];*/
 		int x = 0;
 		int z = 0;
 		int total = 0;
 		while(1)
 		{
 			b = tail(pileB);
+			z = ft_mediane(pileB);
 			tab = create_tab(pileB);
 			tab = ft_sort_int_tab(tab,b);
 			index = tab[b - 1];
-			z = ft_mediane(pileB);
-			//printf(" M %d\n",z);
 			while(x < b)
 			{
-				//si le plus grand est dans le groupw lw plus grand ra
-				//faire autant de rra que de ra
-				//si il est pas dedant rra
-				//
-				if(pileB->first->nbr != index && (total == 0) && (pileB->first->nbr < pileB->first->next->nbr))
+				//printf("\n%d  | %d\n",pileB->first->nbr,index);
+				if(pileB->first->nbr != index)
 				{
 					//printf("%d      %d\n",pileB->first->nbr,z);
-					ra(pileB,0);
+					rotate(pileB,0);
 					if(pileB->first->nbr > z)
 						total++;
 				}
-				/*else if(pileB->first->nbr != index && pileB->first->nbr < z)
-					rra(pileB,0);*/
 				else
 				{
 					push_a(pileA,pileB);
+					if(pileA->first->nbr > pileA->first->next->nbr)
+						swap(pileA,1);
 					//printf("\n%d\n",total);
 					while (total > 0)
 					{
-						rra(pileB,0);
+						if(pileB->first->nbr != index)
+							revers_rotate(pileB,0);
+						else
+						{
+							push_a(pileA,pileB);
+						}
 						total--;
 					}
-					
+					break;
 				}
 				x++;
 			}
-			total = 0;
-			x = 0;
 			if(b == 0)
 			{
 				//printf("DONWIOFNOIF");
 				break;
 			}
+			x = 0;
 			i++;
 		}
 	}
 	afficherListe(pileA);
-	printf("pilea\n");
+	printf("pileA\n");
 	afficherListe(pileB);
 	printf("\npileB\n");
 }

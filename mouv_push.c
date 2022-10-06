@@ -28,7 +28,7 @@ create_tab(t_pile *pile)
 	}
 	return (tri_tab);
 }
-void ra(t_pile *pile,int h)
+void rotate(t_pile *pile,int h)
 {
 	int *tab = create_tab(pile);
 	int *tab2;
@@ -55,13 +55,13 @@ void ra(t_pile *pile,int h)
 	free(tab);
 	free(tab2);
 	if(h)
-		printf("ra\n");
+		printf("rotate\n");
 	else
 		printf("rb\n");
 	//return (pile);
 	//tab2[i] = tmp;
 }
-void rra(t_pile *pile,int h)
+void revers_rotate(t_pile *pile,int h)
 {
 	int *tab = create_tab(pile);
 	int *tab2;
@@ -86,7 +86,7 @@ void rra(t_pile *pile,int h)
 	free(tab2);
 	//afficherListe(pile);
 	if(h)
-		printf("rra\n");
+		printf("revers_rotate\n");
 	else
 		printf("rrb\n");
 	//tab2[i] = tmp;
