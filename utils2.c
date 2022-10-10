@@ -88,3 +88,16 @@ int tail(t_pile *pile)
 	}
 	return(n);
 }
+
+void	ft_putstr_fd(char *s, int fd)
+{
+	int		i;
+
+	i = 0;
+	if (s)
+	{
+		while (s[i])
+			i++;
+		write(fd, s, i);
+	}
+}

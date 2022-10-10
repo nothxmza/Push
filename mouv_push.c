@@ -1,7 +1,6 @@
 #include "push_swap.h"
 
-int *
-create_tab(t_pile *pile)
+int *create_tab(t_pile *pile)
 {
 	t_push	*current;
 	int			i;
@@ -55,9 +54,9 @@ void rotate(t_pile *pile,int h)
 	free(tab);
 	free(tab2);
 	if(h)
-		printf("rotate\n");
+		ft_putstr_fd("ra\n",1);
 	else
-		printf("rb\n");
+		ft_putstr_fd("rb\n",1);
 	//return (pile);
 	//tab2[i] = tmp;
 }
@@ -86,9 +85,9 @@ void revers_rotate(t_pile *pile,int h)
 	free(tab2);
 	//afficherListe(pile);
 	if(h)
-		printf("revers_rotate\n");
+		ft_putstr_fd("rra\n",1);
 	else
-		printf("rrb\n");
+		ft_putstr_fd("rrb\n",1);
 	//tab2[i] = tmp;
 }
 
@@ -101,9 +100,9 @@ void swap(t_pile *p, int i)
 	p->first->next->nbr = tmp;
 	//afficherListe(p);
 	if(i)
-		printf("sa\n");
+		ft_putstr_fd("sa\n",1);
 	else
-		printf("sb\n");
+		ft_putstr_fd("sb\n",1);
 }
 
 void sswap(t_pile *pileA,t_pile *pileB)
@@ -120,7 +119,7 @@ void push_b(t_pile *pileA,t_pile *pileB)
 	pileA->first = pileA->first->next;
 	tmp->next = pileB->first;
 	pileB->first = tmp;
-	printf("pb\n");
+	ft_putstr_fd("pb\n",1);
 
 }
 void push_a(t_pile *pileA,t_pile *pileB)
@@ -131,7 +130,7 @@ void push_a(t_pile *pileA,t_pile *pileB)
 	pileB->first = pileB->first->next;
 	tmp->next = pileA->first;
 	pileA->first = tmp;
-	printf("pa\n");
+	ft_putstr_fd("pa\n",1);
 
 }
 

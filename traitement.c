@@ -116,17 +116,11 @@ void traitement(t_pile *pileA,t_pile *pileB)
 	}*/
 	else
 	{
-		/*creat_groupA(pileA,pileB);
-		reverse_rotate(pileB,0);
-		reverse_rotate(pileB,0);
-		reverse_rotate(pileB,0);*/
 		creat_groupA(pileA,pileB);
 		b = tail(pileB);
 		int *tab = NULL;
 		int index;
-		/*tab = create_tab(pileB);
-		tab = ft_sort_int_tab(tab,b);
-		index = tab[b - 1];*/
+		tab = create_tab(pileB);
 		int x = 0;
 		int z = 0;
 		int total = 0;
@@ -140,14 +134,20 @@ void traitement(t_pile *pileA,t_pile *pileB)
 			while(x < b)
 			{
 				//printf("\n%d  | %d\n",pileB->first->nbr,index);
-				if(pileB->first->nbr != index)
+				//si le 1ier est diff fu plus grand
+				if(pileB->first->nbr != index && pileB->first->next->nbr != index)
 				{
 					//printf("%d      %d\n",pileB->first->nbr,z);
 					rotate(pileB,0);
+					//si le premier est sup a la mediane
+					//jincremente pour mais reverse
 					if(pileB->first->nbr > z)
 						total++;
 				}
-				else
+				else if (pileB->first->next->nbr == index)
+					swap(pileB,0);
+				else//apres chaque push_a peu etre changer lindex directement avec un tab[b - i]
+				//i commencera a 1 et faudra lincrementer 
 				{
 					push_a(pileA,pileB);
 					if(pileA->first->nbr > pileA->first->next->nbr)
@@ -158,11 +158,10 @@ void traitement(t_pile *pileA,t_pile *pileB)
 						if(pileB->first->nbr != index)
 							revers_rotate(pileB,0);
 						else
-						{
 							push_a(pileA,pileB);
-						}
 						total--;
 					}
+					//je break pour changer mon index qui est egale a mon nbr le plus grand
 					break;
 				}
 				x++;
@@ -176,8 +175,4 @@ void traitement(t_pile *pileA,t_pile *pileB)
 			i++;
 		}
 	}
-	afficherListe(pileA);
-	printf("pileA\n");
-	afficherListe(pileB);
-	printf("\npileB\n");
 }

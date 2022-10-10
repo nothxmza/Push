@@ -42,6 +42,7 @@ int 	tail(t_pile *pile);
 void 	clear(t_pile *p);
 int	*ft_sort_int_tab(int *tab, int size);
 int *create_tab(t_pile *pile);
+void	ft_putstr_fd(char *s, int fd);
 
 //MOUV
 void rotate(t_pile *pile,int h);
