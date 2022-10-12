@@ -61,7 +61,7 @@ char	**delete_element_tab(char **argv, int argc, int pos)
 	}
 	return (argv);
 }
-int	*ft_sort_int_tab(int *tab, int size)
+int	*sort_tab(int *tab, int size)
 {
 	int	x;
 	int	y;

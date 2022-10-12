@@ -40,9 +40,11 @@ int		ft_isalnum(int c);
 char	**ft_split(char const *s, char c);
 int 	tail(t_pile *pile);
 void 	clear(t_pile *p);
-int	*ft_sort_int_tab(int *tab, int size);
+int		*sort_tab(int *tab, int size);
 int *create_tab(t_pile *pile);
 void	ft_putstr_fd(char *s, int fd);
+int	*copy_pile(t_pile *pile);
+int	search_position(t_pile *pile, int value);
 
 //MOUV
 void rotate(t_pile *pile,int h);
@@ -52,6 +54,7 @@ void sswap(t_pile *p,t_pile *b);
 void push_b(t_pile *pileA, t_pile *pileB);
 void push_a(t_pile *pileA,t_pile *pileB);
 void	reverse_rotate(t_pile *stack, int i);
+void push(t_pile *pile,int value);
 
 //traitement
 void traitement(t_pile *pileA,t_pile *pileB);

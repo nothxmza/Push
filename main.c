@@ -8,7 +8,12 @@ static void ft_check(char **argv)
 	{
 		while(argv[i][x])
 		{
-			if(!ft_isalnum(argv[i][x]))
+			if(!ft_isalnum(argv[i][x]) || (argv[i][x] == '-' && !argv[i][x + 1]))
+			{
+				printf("error: not only digit");
+				exit(0);
+			}
+			if(argv[i][x] == '-' && argv[i][x + 1] == '-')
 			{
 				printf("error: not only digit");
 				exit(0);
@@ -84,7 +89,7 @@ void ft_ordre(char **argv, int argc)
 		x = 0;*/
 		i++;
 	}
-	if(total+1 == x)
+	if(total + 1 == x)
 	{
 		printf("ERROR dans l'ordre");
 		exit(0);

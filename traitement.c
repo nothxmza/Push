@@ -9,7 +9,7 @@ static int ft_mediane(t_pile *pile)
 	if(pile == NULL)
 		return(0);
 	tab = create_tab(pile);
-	tab = ft_sort_int_tab(tab,a);
+	tab = sort_tab(tab,a);
 	if(a % 2)
 		x = a/2 + 1;
 	else
@@ -106,16 +106,8 @@ void traitement(t_pile *pileA,t_pile *pileB)
 		swap(pileA,1);
 	if(a == 3)
 		ft_trois(pileA);
-	/*if(a == 5)
-	{
-		creat_groupA(pileA,pileB);
-		if(pileB->first->nbr < pileB->first->next->nbr)
-			swap(pileB,0);
-		while(i < tail(pileB))
-			push_a(pileA,pileB);
-	}*/
 	else
-	{
+	/*{
 		creat_groupA(pileA,pileB);
 		b = tail(pileB);
 		int *tab = NULL;
@@ -129,7 +121,7 @@ void traitement(t_pile *pileA,t_pile *pileB)
 			b = tail(pileB);
 			z = ft_mediane(pileB);
 			tab = create_tab(pileB);
-			tab = ft_sort_int_tab(tab,b);
+			tab = sort_tab(tab,b);
 			index = tab[b - 1];
 			while(x < b)
 			{
@@ -144,7 +136,7 @@ void traitement(t_pile *pileA,t_pile *pileB)
 					if(pileB->first->nbr > z)
 						total++;
 				}
-				else if (pileB->first->next->nbr == index)
+				else if (pileB->first->next->nbr  > pileB->first->next->next->nbr)
 					swap(pileB,0);
 				else//apres chaque push_a peu etre changer lindex directement avec un tab[b - i]
 				//i commencera a 1 et faudra lincrementer 
@@ -174,5 +166,40 @@ void traitement(t_pile *pileA,t_pile *pileB)
 			x = 0;
 			i++;
 		}
+	}*/
+	{
+		int	*copy_tab;
+		int	*sorted_tab;
+		int	pos_max;
+
+		copy_tab = NULL;
+		sorted_tab = NULL;
+		pos_max = 0;
+		creat_groupA(pileA,pileB);
+		while(tail(pileB) > 0)
+		{
+			copy_tab = copy_pile(pileB);
+			sorted_tab = sort_tab(copy_tab,tail(pileB));
+			pos_max = search_position(pileB,sorted_tab[tail(pileB) - 1]);
+			if(pos_max  <= tail(pileB) / 2)
+			{
+				while(pos_max > 0)
+				{
+					rotate(pileB, 0);
+					pos_max--;
+				}
+			}
+			else
+			{
+				pos_max = tail(pileB) - pos_max;
+				while(pos_max > 0)
+				{
+					revers_rotate(pileB,0);
+					pos_max--;
+				}
+			}
+			push_a(pileA,pileB);
+		}
 	}
+	//afficherListe(pileA);
 }
