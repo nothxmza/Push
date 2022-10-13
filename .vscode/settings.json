@@ -1,0 +1,8 @@
+{
+	"files.associations": {
+		"__bit_reference": "c",
+		"algorithm": "c",
+		"vector": "c",
+		"push_swap.h": "c"
+	}
+}

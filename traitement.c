@@ -15,6 +15,7 @@ static int ft_mediane(t_pile *pile)
 	else
 		x = a/2;
 	index = tab[x - 1];
+	free(tab);
 	return(index);
 }
 
@@ -71,7 +72,7 @@ void static creat_groupA(t_pile *pileA, t_pile *pileB)
 	while(a > 3)
 	{
 		index = ft_mediane(pileA);
-		//printf("L %d\n",index);
+		//afficherListe(pileA);
 		while (i < a)
 		{
 			if(index > pileA->first->nbr)
@@ -86,6 +87,7 @@ void static creat_groupA(t_pile *pileA, t_pile *pileB)
 		i = 0;
 		tmp++;
 		free(tab_tmp);
+		//printf("L %d\n",a);
 		a = tail(pileA);
 	}
 	if(tail(pileA) == 2 && (pileA->first->nbr > pileA->first->next->nbr))
@@ -107,79 +109,18 @@ void traitement(t_pile *pileA,t_pile *pileB)
 	if(a == 3)
 		ft_trois(pileA);
 	else
-	/*{
-		creat_groupA(pileA,pileB);
-		b = tail(pileB);
-		int *tab = NULL;
-		int index;
-		tab = create_tab(pileB);
-		int x = 0;
-		int z = 0;
-		int total = 0;
-		while(1)
-		{
-			b = tail(pileB);
-			z = ft_mediane(pileB);
-			tab = create_tab(pileB);
-			tab = sort_tab(tab,b);
-			index = tab[b - 1];
-			while(x < b)
-			{
-				//printf("\n%d  | %d\n",pileB->first->nbr,index);
-				//si le 1ier est diff fu plus grand
-				if(pileB->first->nbr != index && pileB->first->next->nbr != index)
-				{
-					//printf("%d      %d\n",pileB->first->nbr,z);
-					rotate(pileB,0);
-					//si le premier est sup a la mediane
-					//jincremente pour mais reverse
-					if(pileB->first->nbr > z)
-						total++;
-				}
-				else if (pileB->first->next->nbr  > pileB->first->next->next->nbr)
-					swap(pileB,0);
-				else//apres chaque push_a peu etre changer lindex directement avec un tab[b - i]
-				//i commencera a 1 et faudra lincrementer 
-				{
-					push_a(pileA,pileB);
-					if(pileA->first->nbr > pileA->first->next->nbr)
-						swap(pileA,1);
-					//printf("\n%d\n",total);
-					while (total > 0)
-					{
-						if(pileB->first->nbr != index)
-							revers_rotate(pileB,0);
-						else
-							push_a(pileA,pileB);
-						total--;
-					}
-					//je break pour changer mon index qui est egale a mon nbr le plus grand
-					break;
-				}
-				x++;
-			}
-			if(b == 0)
-			{
-				//printf("DONWIOFNOIF");
-				break;
-			}
-			x = 0;
-			i++;
-		}
-	}*/
 	{
-		int	*copy_tab;
 		int	*sorted_tab;
 		int	pos_max;
 
-		copy_tab = NULL;
 		sorted_tab = NULL;
 		pos_max = 0;
 		creat_groupA(pileA,pileB);
+		
 		while(tail(pileB) > 0)
 		{
-			copy_tab = copy_pile(pileB);
-			sorted_tab = sort_tab(copy_tab,tail(pileB));
+			sorted_tab = create_tab(pileB);
+			sorted_tab = sort_tab(sorted_tab,tail(pileB));
 			pos_max = search_position(pileB,sorted_tab[tail(pileB) - 1]);
 			if(pos_max  <= tail(pileB) / 2)
 			{
@@ -201,5 +142,5 @@ void traitement(t_pile *pileA,t_pile *pileB)
 			push_a(pileA,pileB);
 		}
 	}
-	//afficherListe(pileA);
+
 }

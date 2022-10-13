@@ -114,6 +114,7 @@ int main(int argc,char **argv)
 	ft_ordre(argv,argc);
 	pileA = creat_pile(argv,argc);
 	pileB = init_pile(pileB);
+	//afficherListe(pileA);
 	traitement(pileA,pileB);
 	//printf("%lu\n", strlen(nbr));
 }

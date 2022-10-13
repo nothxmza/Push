@@ -102,25 +102,6 @@ void	ft_putstr_fd(char *s, int fd)
 	}
 }
 
-int	*copy_pile(t_pile *pile)
-{
-	int			length_pile;
-	int			*tab_pile;
-	int			i;
-	t_push	*now;
-
-	length_pile = tail(pile);
-	tab_pile = malloc(sizeof(int) * length_pile);
-	i = 0;
-	now = pile->first;
-	while (i < length_pile)
-	{
-		tab_pile[i] = now->nbr;
-		now = now->next;
-		i++;
-	}
-	return (tab_pile);
-}
 int	search_position(t_pile *pile, int value)
 {
 	int			position;

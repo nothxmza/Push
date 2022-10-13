@@ -43,7 +43,6 @@ void 	clear(t_pile *p);
 int		*sort_tab(int *tab, int size);
 int *create_tab(t_pile *pile);
 void	ft_putstr_fd(char *s, int fd);
-int	*copy_pile(t_pile *pile);
 int	search_position(t_pile *pile, int value);
 
 //MOUV
