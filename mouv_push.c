@@ -1,11 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mouv_push.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/14 13:40:53 by hterras           #+#    #+#             */
+/*   Updated: 2022/10/14 14:00:58 by hterras          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-int *create_tab(t_pile *pile)
+int	*create_tab(t_pile *pile)
 {
-	t_push	*current;
+	t_push		*current;
 	int			i;
 	int			j;
 	int			*tri_tab;
+	int			taile;
 
 	i = 0;
 	j = 0;
@@ -18,7 +31,7 @@ int *create_tab(t_pile *pile)
 	}
 	current = pile->first;
 	tri_tab = malloc(sizeof(int) * i);
-	int taile = tail(pile);
+	taile = tail(pile);
 	while (taile >= j)
 	{
 		tri_tab[j] = current->nbr;
@@ -27,106 +40,77 @@ int *create_tab(t_pile *pile)
 	}
 	return (tri_tab);
 }
-void rotate(t_pile *pile,int h)
+
+void	rotate(t_pile *pile, int h)
 {
-	int *tab = create_tab(pile);
-	int size = tail(pile);
-	int *tab2;
-	int tmp = 0;
-	int i = 0;
-	while(tab[i])
-		i++;
+	int	*tab;
+	int	*tab2;
+	int	tmp;
+	int	j;
+	int	x;
+
+	tab = create_tab(pile);
 	tmp = tab[0];
-	tab2 = NULL;
-	tab2 = malloc(sizeof(int) * size);
-	int j = 0;
-	int x = 1;
-	while(x < size)
-	{
+	tab2 = malloc(sizeof(int) * tail(pile));
+	j = 0;
+	x = 1;
+	while (x < tail(pile))
 		tab2[j++] = tab[x++];
-	}
 	tab2[j] = tmp;
 	clear(pile);
-	pile = insertion_pl2(tab2,pile, j);
+	pile = insertion_pl2(tab2, pile, j);
 	free(tab);
 	free(tab2);
-	if(h)
-		ft_putstr_fd("ra\n",1);
+	if (h)
+		ft_putstr_fd("ra\n", 1);
 	else
-		ft_putstr_fd("rb\n",1);
+		ft_putstr_fd("rb\n", 1);
 }
-void revers_rotate(t_pile *pile,int h)
+
+void	revers_rotate(t_pile *pile, int h)
 {
-	int *tab = create_tab(pile);
-	int size = tail(pile);
-	int *tab2;
-	int tmp = 0;
-	int i = 0;
-	while(tab[i])
-		i++;
-	tmp = tab[size - 1];
+	int	*tab;
+	int	*tab2;
+	int	tmp;
+	int	j;
+	int	x;
+
+	j = 1;
+	x = 0;
+	tmp = 0;
+	tab = create_tab(pile);
+	tmp = tab[tail(pile) - 1];
 	tab2 = NULL;
-	tab2 = malloc(sizeof(int) * size);
-	int j = 1;
-	int x = 0;
-	//printf("%d\n",i);
+	tab2 = malloc(sizeof(int) * tail(pile));
 	tab2[0] = tmp;
-	while(x < size - 1)
-	{
+	while (x < tail(pile) - 1)
 		tab2[j++] = tab[x++];
-	}
 	clear(pile);
-	pile = insertion_pl2(tab2,pile, j - 1);
+	pile = insertion_pl2(tab2, pile, j - 1);
 	free(tab);
 	free(tab2);
-	//afficherListe(pile);
-	if(h)
-		ft_putstr_fd("rra\n",1);
+	if (h)
+		ft_putstr_fd("rra\n", 1);
 	else
-		ft_putstr_fd("rrb\n",1);
-	//tab2[i] = tmp;
+		ft_putstr_fd("rrb\n", 1);
 }
 
-
-void swap(t_pile *p, int i)
+void	swap(t_pile *p, int i)
 {
-	int tmp = 0;
-	
+	int	tmp;
+
+	tmp = 0;
 	tmp = p->first->nbr;
 	p->first->nbr = p->first->next->nbr;
 	p->first->next->nbr = tmp;
-	//afficherListe(p);
-	if(i)
-		ft_putstr_fd("sa\n",1);
+	if (i)
+		ft_putstr_fd("sa\n", 1);
 	else
-		ft_putstr_fd("sb\n",1);
+		ft_putstr_fd("sb\n", 1);
 }
 
-void sswap(t_pile *pileA,t_pile *pileB)
+void	sswap(t_pile *pileA, t_pile *pileB)
 {
-	swap(pileA,1);
-	swap(pileB,0);
-}
-
-void push_b(t_pile *pileA,t_pile *pileB)
-{
-	t_push *tmp;
-
-	tmp = pileA->first;
-	pileA->first = pileA->first->next;
-	tmp->next = pileB->first;
-	pileB->first = tmp;
-	ft_putstr_fd("pb\n",1);
-
-}
-void push_a(t_pile *pileA,t_pile *pileB)
-{
-	t_push *tmp;
-
-	tmp = pileB->first;
-	pileB->first = pileB->first->next;
-	tmp->next = pileA->first;
-	pileA->first = tmp;
-	ft_putstr_fd("pa\n",1);
-
+	swap(pileA, 1);
+	swap(pileB, 0);
 }

@@ -3,14 +3,18 @@ NAME		=	push_swap
 FIL_M		=	main.c \
 				utils.c \
 				utils2.c \
+				utils3.c \
 				init_list.c \
 				mouv_push.c \
+				mouv2_push.c \
 				traitement.c \
+				traitement2.c \
+				insert_list.c \
 
 OBJ_M		=	$(FIL_M:.c=.o)
 
 CC			=	gcc
-CFLAG		=	
+CFLAG		=	-Wall -Wextra -Werror
 RM			=	rm -f
 MAKE		=	make
 

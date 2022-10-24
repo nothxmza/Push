@@ -1,26 +1,38 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/18 11:49:50 by hterras           #+#    #+#             */
+/*   Updated: 2022/10/19 12:50:11 by hterras          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-int	ft_atoi(char *str)
+long long	ft_atoi(char *str)
 {
-	int			nb;
-	int				sign;
+	long long		num;
+	int				i;
+	int				np;
 
-	nb = 0;
-	sign = 1;
-	while (ft_is_space(*str))
-		str++;
-	if (ft_is_sign(*str))
+	np = 1;
+	i = 0;
+	num = 0;
+	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\f' || \
+			str[i] == '\r' || str[i] == '\n' || str[i] == '\v')
+		i++;
+	if (str[i] == '+' || str[i] == '-')
+		if (str[i++] == '-')
+			np = -1;
+	while (str[i] >= '0' && str[i] <= '9')
 	{
-		if (*str == '-')
-			sign *= -1;
-		str++;
+		num = num * 10 + (str[i] - '0');
+		i++;
 	}
-	while (ft_isdigit(*str))
-		nb = (nb * 10) + (*str++ - '0');
-	if (!ft_is_space(*str) && *str)
-			exit(-1);
-	nb *= sign;
-	return (nb);
+	return ((long long)(np * num));
 }
 
 int	ft_isdigit(int c)
@@ -29,6 +41,7 @@ int	ft_isdigit(int c)
 		return (1);
 	return (0);
 }
+
 int	ft_is_space(char a)
 {
 	if ((a >= 9 && a <= 13) || a == ' ')
@@ -48,40 +61,4 @@ int	ft_isalnum(int c)
 	if ((c >= '0' && c <= '9') || c == '-')
 		return (1);
 	return (0);
-}
-char	**delete_element_tab(char **argv, int argc, int pos)
-{
-	int i;
-
-	i = pos;
-	while (i < argc)
-	{
-		argv[i] = argv[i + 1];
-		i++;
-	}
-	return (argv);
-}
-int	*sort_tab(int *tab, int size)
-{
-	int	x;
-	int	y;
-	int	tmp_list;
-
-	x = 0;
-	while (x <= size - 1)
-	{
-		y = 0;
-		while (y <= size - 2)
-		{
-			if (tab[y] > tab[x])
-			{
-				tmp_list = tab[x];
-				tab[x] = tab[y];
-				tab[y] = tmp_list;
-			}
-			y++;
-		}
-		x++;
-	}
-	return (tab);
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils2.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/18 11:53:54 by hterras           #+#    #+#             */
+/*   Updated: 2022/10/18 11:56:35 by hterras          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 static int	ft_countwords(char const *s, char c)
@@ -75,46 +87,19 @@ char	**ft_split(char const *s, char c)
 	return (str);
 }
 
-int tail(t_pile *pile)
+int	tail(t_pile *pile)
 {
-	int n = 0;
+	int		n;
+	t_push	*actuel;
+
+	n = 0;
 	if (pile == NULL)
 		exit(EXIT_FAILURE);
-	t_push *actuel = pile->first;
+	actuel = pile->first;
 	while (actuel->next != NULL)
 	{
 		n++;
 		actuel = actuel->next;
 	}
-	return(n);
-}
-
-void	ft_putstr_fd(char *s, int fd)
-{
-	int		i;
-
-	i = 0;
-	if (s)
-	{
-		while (s[i])
-			i++;
-		write(fd, s, i);
-	}
-}
-
-int	search_position(t_pile *pile, int value)
-{
-	int			position;
-	t_push		*now;
-
-	now = pile->first;
-	position = 0;
-	while (now->next != NULL)
-	{
-		if (now->nbr == value)
-			break ;
-		position++;
-		now = now->next;
-	}
-	return (position);
+	return (n);
 }
